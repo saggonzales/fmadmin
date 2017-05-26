@@ -327,7 +327,8 @@ class EmployeesController extends Controller
 		if(env('MAIL_USERNAME') != null && env('MAIL_USERNAME') != "null" && env('MAIL_USERNAME') != "") {
 			// Send mail to User his new Password
 			Mail::send('emails.send_login_cred_change', ['user' => $user, 'password' => $request->password], function ($m) use ($user) {
-				$m->from(LAConfigs::getByKey('default_email'), LAConfigs::getByKey('sitename'));
+				// $m->from(LAConfigs::getByKey('default_email'), LAConfigs::getByKey('sitename'));
+				$m->from( env('MAIL_FROM'), env('SITENAME'));
 				$m->to($user->email, $user->name)->subject('LaraAdmin - Login Credentials chnaged');
 			});
 		} else {
