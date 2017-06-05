@@ -7,8 +7,10 @@ Route::get('/', function()
 {
     if (Auth::guest()) return Redirect::to('/login');
 
-});
 
+
+
+});
 
 
 //Route::get('/', 'HomeController@index');
@@ -65,17 +67,19 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	Route::post(config('laraadmin.adminRoute') . '/save_permissions/{id}', 'LA\PermissionsController@save_permissions');
 	
 	/* ================== Departments ================== */
-	Route::resource(config('laraadmin.adminRoute') . '/departments', 'LA\DepartmentsController');
-	Route::get(config('laraadmin.adminRoute') . '/department_dt_ajax', 'LA\DepartmentsController@dtajax');
+	// Route::resource(config('laraadmin.adminRoute') . '/departments', 'LA\DepartmentsController');
+	// Route::get(config('laraadmin.adminRoute') . '/department_dt_ajax', 'LA\DepartmentsController@dtajax');
+
+	/* ================== Organizations ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/organizations', 'LA\OrganizationsController');
+	Route::get(config('laraadmin.adminRoute') . '/organization_dt_ajax', 'LA\OrganizationsController@dtajax');
+
 	
 	/* ================== Employees ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/employees', 'LA\EmployeesController');
 	Route::get(config('laraadmin.adminRoute') . '/employee_dt_ajax', 'LA\EmployeesController@dtajax');
 	Route::post(config('laraadmin.adminRoute') . '/change_password/{id}', 'LA\EmployeesController@change_password');
 	
-	/* ================== Organizations ================== */
-	Route::resource(config('laraadmin.adminRoute') . '/organizations', 'LA\OrganizationsController');
-	Route::get(config('laraadmin.adminRoute') . '/organization_dt_ajax', 'LA\OrganizationsController@dtajax');
 
 	/* ================== Backups ================== */
 	Route::resource(config('laraadmin.adminRoute') . '/backups', 'LA\BackupsController');
@@ -84,8 +88,15 @@ Route::group(['as' => $as, 'middleware' => ['auth', 'permission:ADMIN_PANEL']], 
 	Route::get(config('laraadmin.adminRoute') . '/downloadBackup/{id}', 'LA\BackupsController@downloadBackup');
 
 
-	/* ================== Devices ================== */
-	Route::resource(config('laraadmin.adminRoute') . '/devices', 'LA\DevicesController');	
-	Route::get(config('laraadmin.adminRoute') . '/device_dt_ajax', 'LA\DevicesController@dtajax');
 
+
+	/* ================== Fitmachines ================== */
+	// Route::resource(config('laraadmin.adminRoute') . '/fitmachines', 'LA\FitmachinesController');	
+	// Route::get(config('laraadmin.adminRoute') . '/device_dt_ajax', 'LA\FitmachinesController@dtajax');
+
+
+
+	/* ================== FitMachines ================== */
+	Route::resource(config('laraadmin.adminRoute') . '/fitmachines', 'LA\FitMachinesController');
+	Route::get(config('laraadmin.adminRoute') . '/fitmachine_dt_ajax', 'LA\FitMachinesController@dtajax');
 });

@@ -17,18 +17,15 @@
 				<div class="col-md-9">
 					<h4 class="name">{{ $organization->$view_col }}</h4>
 					<div class="row stats">
-						<div class="col-md-4"><i class="fa fa-facebook"></i> 234</div>
-						<div class="col-md-4"><i class="fa fa-twitter"></i> 12</div>
-						<div class="col-md-4"><i class="fa fa-instagram"></i> 89</div>
+						<div class="col-md-4"></div>
+						<div class="col-md-4"></div>
+						<div class="col-md-4"></div>
 					</div>
 					<p class="desc">Test Description in one line</p>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-3">
-			<div class="dats1"><div class="label2">Admin</div></div>
-			<div class="dats1"><i class="fa fa-envelope-o"></i> superadmin@gmail.com</div>
-			<div class="dats1"><i class="fa fa-map-marker"></i> Pune, India</div>
 		</div>
 		<div class="col-md-4">
 			<!--
@@ -46,39 +43,7 @@
 				<a class="face" data-toggle="tooltip" data-placement="top" title="John Doe"><img src="{{ asset('la-assets/img/user7-128x128.jpg') }}" alt=""></a>
 			</div>
 			-->
-			<div class="dats1 pb">
-				<div class="clearfix">
-					<span class="pull-left">Task #1</span>
-					<small class="pull-right">20%</small>
-				</div>
-				<div class="progress progress-xs active">
-					<div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-						<span class="sr-only">20% Complete</span>
-					</div>
-				</div>
-			</div>
-			<div class="dats1 pb">
-				<div class="clearfix">
-					<span class="pull-left">Task #2</span>
-					<small class="pull-right">90%</small>
-				</div>
-				<div class="progress progress-xs active">
-					<div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 90%" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-						<span class="sr-only">90% Complete</span>
-					</div>
-				</div>
-			</div>
-			<div class="dats1 pb">
-				<div class="clearfix">
-					<span class="pull-left">Task #3</span>
-					<small class="pull-right">60%</small>
-				</div>
-				<div class="progress progress-xs active">
-					<div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 60%" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-						<span class="sr-only">60% Complete</span>
-					</div>
-				</div>
-			</div>
+
 		</div>
 		<div class="col-md-1 actions">
 			@la_access("Organizations", "edit")
@@ -107,16 +72,9 @@
 						<h4>General Info</h4>
 					</div>
 					<div class="panel-body">
-						@la_display($module, 'name')
-						@la_display($module, 'phone')
-						@la_display($module, 'sub_domain')
-						@la_display($module, 'assigned_to')
-						@la_display($module, 'connect_since')
-						@la_display($module, 'address')
-						@la_display($module, 'city')
-						@la_display($module, 'description')
-						@la_display($module, 'profile_image')
-						@la_display($module, 'profile')
+						@la_display($module, 'name')						
+						@la_display($module, 'sub_domain')						
+						@la_input($module, 'logo')				
 					</div>
 				</div>
 			</div>

@@ -1,7 +1,7 @@
 @extends('la.layouts.app')
 
 @section('htmlheader_title')
-	Department View
+	Organization View
 @endsection
 
 
@@ -15,20 +15,17 @@
 					<div class="profile-icon text-primary"><i class="fa {{ $module->fa_icon }}"></i></div>
 				</div>
 				<div class="col-md-9">
-					<h4 class="name">{{ $department->$view_col }}</h4>
+					<h4 class="name">{{ $organization->$view_col }}</h4>
 					<div class="row stats">
 						<div class="col-md-4"></div>
 						<div class="col-md-4"></div>
 						<div class="col-md-4"></div>
 					</div>
-					<p class="desc">{{ $department->$view_col }}</p>
+					<p class="desc">Test Description in one line</p>
 				</div>
 			</div>
 		</div>
 		<div class="col-md-3">
-			<div class="dats1"></div>
-			<div class="dats1"></div>
-			<div class="dats1"></div>
 		</div>
 		<div class="col-md-4">
 			<!--
@@ -46,23 +43,15 @@
 				<a class="face" data-toggle="tooltip" data-placement="top" title="John Doe"><img src="{{ asset('la-assets/img/user7-128x128.jpg') }}" alt=""></a>
 			</div>
 			-->
-			<div class="dats1 pb">
-				<div class="clearfix"></div>
-			</div>
-			<div class="dats1 pb">
-				<div class="clearfix"></div>
-			</div>
-			<div class="dats1 pb">
-				<div class="clearfix"></div>
-			</div>
+			
 		</div>
 		<div class="col-md-1 actions">
-			@la_access("Departments", "edit")
-				<a href="{{ url(config('laraadmin.adminRoute') . '/departments/'.$department->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
+			@la_access("Organization", "edit")
+				<a href="{{ url(config('laraadmin.adminRoute') . '/organizations/'.$organization->id.'/edit') }}" class="btn btn-xs btn-edit btn-default"><i class="fa fa-pencil"></i></a><br>
 			@endla_access
 			
-			@la_access("Departments", "delete")
-				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.departments.destroy', $department->id], 'method' => 'delete', 'style'=>'display:inline']) }}
+			@la_access("Organization", "delete")
+				{{ Form::open(['route' => [config('laraadmin.adminRoute') . '.organizations.destroy', $organization->id], 'method' => 'delete', 'style'=>'display:inline']) }}
 					<button class="btn btn-default btn-delete btn-xs" type="submit"><i class="fa fa-times"></i></button>
 				{{ Form::close() }}
 			@endla_access
@@ -70,9 +59,9 @@
 	</div>
 
 	<ul data-toggle="ajax-tab" class="nav nav-tabs profile" role="tablist">
-		<li class=""><a href="{{ url(config('laraadmin.adminRoute') . '/departments') }}" data-toggle="tooltip" data-placement="right" title="Back to Departments"><i class="fa fa-chevron-left"></i></a></li>
+		<li class=""><a href="{{ url(config('laraadmin.adminRoute') . '/organizations') }}" data-toggle="tooltip" data-placement="right" title="Back to Organization"><i class="fa fa-chevron-left"></i></a></li>
 		<li class="active"><a role="tab" data-toggle="tab" class="active" href="#tab-general-info" data-target="#tab-info"><i class="fa fa-bars"></i> General Info</a></li>
-<!-- 		<li class=""><a role="tab" data-toggle="tab" href="#tab-timeline" data-target="#tab-timeline"><i class="fa fa-clock-o"></i> Timeline</a></li> -->
+		<li class=""><a role="tab" data-toggle="tab" href="#tab-timeline" data-target="#tab-timeline"><i class="fa fa-clock-o"></i> Timeline</a></li>
 	</ul>
 
 	<div class="tab-content">
@@ -86,6 +75,8 @@
 						@la_display($module, 'name')
 						@la_display($module, 'tags')
 						@la_display($module, 'color')
+						@la_display($module, 'sub_domain')
+						@la_display($module, 'logo')
 					</div>
 				</div>
 			</div>

@@ -33,16 +33,10 @@
 					@la_form($module)
 					
 					{{--
-					@la_input($module, 'name')
-					@la_input($module, 'phone')
+					@la_input($module, 'name')					
 					@la_input($module, 'sub_domain')
-					@la_input($module, 'assigned_to')
-					@la_input($module, 'connect_since')
-					@la_input($module, 'address')
-					@la_input($module, 'city')
 					@la_input($module, 'description')
 					@la_input($module, 'profile_image')
-					@la_input($module, 'profile')
 					--}}
                     <br>
 					<div class="form-group">

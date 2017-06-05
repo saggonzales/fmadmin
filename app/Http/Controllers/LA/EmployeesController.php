@@ -142,8 +142,13 @@ class EmployeesController extends Controller
 			if(isset($employee->id)) {
 				$module = Module::get('Employees');
 				$module->row = $employee;
-				
-				// Get User Table Information
+
+
+// echo "<pre>";
+// print_r($module);
+// echo "</pre>";				
+// die();
+// 				// Get User Table Information
 				$user = User::where('context_id', '=', $id)->firstOrFail();
 				
 				return view('la.employees.show', [
@@ -329,7 +334,7 @@ class EmployeesController extends Controller
 			Mail::send('emails.send_login_cred_change', ['user' => $user, 'password' => $request->password], function ($m) use ($user) {
 				// $m->from(LAConfigs::getByKey('default_email'), LAConfigs::getByKey('sitename'));
 				$m->from( env('MAIL_FROM'), env('SITENAME'));
-				$m->to($user->email, $user->name)->subject('LaraAdmin - Login Credentials chnaged');
+				$m->to($user->email, $user->name)->subject('FitMachine Admin - Login Credentials changed');
 			});
 		} else {
 			Log::info("User change_password: username: ".$user->email." Password: ".$request->password);

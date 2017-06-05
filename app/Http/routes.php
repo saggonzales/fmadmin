@@ -11,6 +11,13 @@
 |
 */
 
+
+Route::controller('devices', 'DevicesController', [
+    'anyData'  => 'datatables.data',
+    'getIndex' => 'datatables',
+]);
+
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });

@@ -17,37 +17,37 @@ use Collective\Html\FormFacade as Form;
 use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 
-use App\Models\Organisation;
+use App\Models\FitMachine;
 
-class OrganisationsController extends Controller
+class FitMachinesController extends Controller
 {
 	public $show_action = true;
-	public $view_col = 'sub_domain';
-	public $listing_cols = ['id', 'name', 'sub_domain'];
+	public $view_col = 'mac_address';
+	public $listing_cols = ['id', 'mac_address', 'description', 'last_reported', 'fw_version'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
 		if(\Dwij\Laraadmin\Helpers\LAHelper::laravel_ver() == 5.3) {
 			$this->middleware(function ($request, $next) {
-				$this->listing_cols = ModuleFields::listingColumnAccessScan('Organisations', $this->listing_cols);
+				$this->listing_cols = ModuleFields::listingColumnAccessScan('FitMachines', $this->listing_cols);
 				return $next($request);
 			});
 		} else {
-			$this->listing_cols = ModuleFields::listingColumnAccessScan('Organisations', $this->listing_cols);
+			$this->listing_cols = ModuleFields::listingColumnAccessScan('FitMachines', $this->listing_cols);
 		}
 	}
 	
 	/**
-	 * Display a listing of the Organisations.
+	 * Display a listing of the FitMachines.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index()
 	{
-		$module = Module::get('Organisations');
+		$module = Module::get('FitMachines');
 		
 		if(Module::hasAccess($module->id)) {
-			return View('la.organisations.index', [
+			return View('la.fitmachines.index', [
 				'show_actions' => $this->show_action,
 				'listing_cols' => $this->listing_cols,
 				'module' => $module
@@ -58,7 +58,7 @@ class OrganisationsController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new organisation.
+	 * Show the form for creating a new fitmachine.
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
@@ -68,16 +68,16 @@ class OrganisationsController extends Controller
 	}
 
 	/**
-	 * Store a newly created organisation in database.
+	 * Store a newly created fitmachine in database.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request)
 	{
-		if(Module::hasAccess("Organisations", "create")) {
+		if(Module::hasAccess("FitMachines", "create")) {
 		
-			$rules = Module::validateRules("Organisations", $request);
+			$rules = Module::validateRules("FitMachines", $request);
 			
 			$validator = Validator::make($request->all(), $rules);
 			
@@ -85,9 +85,9 @@ class OrganisationsController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();
 			}
 			
-			$insert_id = Module::insert("Organisations", $request);
+			$insert_id = Module::insert("FitMachines", $request);
 			
-			return redirect()->route(config('laraadmin.adminRoute') . '.organisations.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.fitmachines.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -95,30 +95,30 @@ class OrganisationsController extends Controller
 	}
 
 	/**
-	 * Display the specified organisation.
+	 * Display the specified fitmachine.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show($id)
 	{
-		if(Module::hasAccess("Organisations", "view")) {
+		if(Module::hasAccess("FitMachines", "view")) {
 			
-			$organisation = Organisation::find($id);
-			if(isset($organisation->id)) {
-				$module = Module::get('Organisations');
-				$module->row = $organisation;
+			$fitmachine = FitMachine::find($id);
+			if(isset($fitmachine->id)) {
+				$module = Module::get('FitMachines');
+				$module->row = $fitmachine;
 				
-				return view('la.organisations.show', [
+				return view('la.fitmachines.show', [
 					'module' => $module,
 					'view_col' => $this->view_col,
 					'no_header' => true,
 					'no_padding' => "no-padding"
-				])->with('organisation', $organisation);
+				])->with('fitmachine', $fitmachine);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("organisation"),
+					'record_name' => ucfirst("fitmachine"),
 				]);
 			}
 		} else {
@@ -127,28 +127,28 @@ class OrganisationsController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified organisation.
+	 * Show the form for editing the specified fitmachine.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit($id)
 	{
-		if(Module::hasAccess("Organisations", "edit")) {			
-			$organisation = Organisation::find($id);
-			if(isset($organisation->id)) {	
-				$module = Module::get('Organisations');
+		if(Module::hasAccess("FitMachines", "edit")) {			
+			$fitmachine = FitMachine::find($id);
+			if(isset($fitmachine->id)) {	
+				$module = Module::get('FitMachines');
 				
-				$module->row = $organisation;
+				$module->row = $fitmachine;
 				
-				return view('la.organisations.edit', [
+				return view('la.fitmachines.edit', [
 					'module' => $module,
 					'view_col' => $this->view_col,
-				])->with('organisation', $organisation);
+				])->with('fitmachine', $fitmachine);
 			} else {
 				return view('errors.404', [
 					'record_id' => $id,
-					'record_name' => ucfirst("organisation"),
+					'record_name' => ucfirst("fitmachine"),
 				]);
 			}
 		} else {
@@ -157,7 +157,7 @@ class OrganisationsController extends Controller
 	}
 
 	/**
-	 * Update the specified organisation in storage.
+	 * Update the specified fitmachine in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
 	 * @param  int  $id
@@ -165,9 +165,9 @@ class OrganisationsController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		if(Module::hasAccess("Organisations", "edit")) {
+		if(Module::hasAccess("FitMachines", "edit")) {
 			
-			$rules = Module::validateRules("Organisations", $request, true);
+			$rules = Module::validateRules("FitMachines", $request, true);
 			
 			$validator = Validator::make($request->all(), $rules);
 			
@@ -175,9 +175,9 @@ class OrganisationsController extends Controller
 				return redirect()->back()->withErrors($validator)->withInput();;
 			}
 			
-			$insert_id = Module::updateRow("Organisations", $request, $id);
+			$insert_id = Module::updateRow("FitMachines", $request, $id);
 			
-			return redirect()->route(config('laraadmin.adminRoute') . '.organisations.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.fitmachines.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
@@ -185,18 +185,18 @@ class OrganisationsController extends Controller
 	}
 
 	/**
-	 * Remove the specified organisation from storage.
+	 * Remove the specified fitmachine from storage.
 	 *
 	 * @param  int  $id
 	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy($id)
 	{
-		if(Module::hasAccess("Organisations", "delete")) {
-			Organisation::find($id)->delete();
+		if(Module::hasAccess("FitMachines", "delete")) {
+			FitMachine::find($id)->delete();
 			
 			// Redirecting to index() method
-			return redirect()->route(config('laraadmin.adminRoute') . '.organisations.index');
+			return redirect()->route(config('laraadmin.adminRoute') . '.fitmachines.index');
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
@@ -209,11 +209,11 @@ class OrganisationsController extends Controller
 	 */
 	public function dtajax()
 	{
-		$values = DB::table('organisations')->select($this->listing_cols)->whereNull('deleted_at');
+		$values = DB::table('fitmachines')->select($this->listing_cols)->whereNull('deleted_at');
 		$out = Datatables::of($values)->make();
 		$data = $out->getData();
 
-		$fields_popup = ModuleFields::getModuleFields('Organisations');
+		$fields_popup = ModuleFields::getModuleFields('FitMachines');
 		
 		for($i=0; $i < count($data->data); $i++) {
 			for ($j=0; $j < count($this->listing_cols); $j++) { 
@@ -222,7 +222,7 @@ class OrganisationsController extends Controller
 					$data->data[$i][$j] = ModuleFields::getFieldValue($fields_popup[$col], $data->data[$i][$j]);
 				}
 				if($col == $this->view_col) {
-					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/organisations/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
+					$data->data[$i][$j] = '<a href="'.url(config('laraadmin.adminRoute') . '/fitmachines/'.$data->data[$i][0]).'">'.$data->data[$i][$j].'</a>';
 				}
 				// else if($col == "author") {
 				//    $data->data[$i][$j];
@@ -231,12 +231,12 @@ class OrganisationsController extends Controller
 			
 			if($this->show_action) {
 				$output = '';
-				if(Module::hasAccess("Organisations", "edit")) {
-					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/organisations/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
+				if(Module::hasAccess("FitMachines", "edit")) {
+					$output .= '<a href="'.url(config('laraadmin.adminRoute') . '/fitmachines/'.$data->data[$i][0].'/edit').'" class="btn btn-warning btn-xs" style="display:inline;padding:2px 5px 3px 5px;"><i class="fa fa-edit"></i></a>';
 				}
 				
-				if(Module::hasAccess("Organisations", "delete")) {
-					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.organisations.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
+				if(Module::hasAccess("FitMachines", "delete")) {
+					$output .= Form::open(['route' => [config('laraadmin.adminRoute') . '.fitmachines.destroy', $data->data[$i][0]], 'method' => 'delete', 'style'=>'display:inline']);
 					$output .= ' <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-times"></i></button>';
 					$output .= Form::close();
 				}

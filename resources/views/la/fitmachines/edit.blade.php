@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
 @section("contentheader_title")
-	<a href="{{ url(config('laraadmin.adminRoute') . '/devices') }}">Device</a> :
+	<a href="{{ url(config('laraadmin.adminRoute') . '/fitmachines') }}">FitMachine</a> :
 @endsection
-@section("contentheader_description", $device->$view_col)
-@section("section", "Devices")
-@section("section_url", url(config('laraadmin.adminRoute') . '/devices'))
+@section("contentheader_description", $fitmachine->$view_col)
+@section("section", "FitMachines")
+@section("section_url", url(config('laraadmin.adminRoute') . '/fitmachines'))
 @section("sub_section", "Edit")
 
-@section("htmlheader_title", "Devices Edit : ".$device->$view_col)
+@section("htmlheader_title", "FitMachines Edit : ".$fitmachine->$view_col)
 
 @section("main-content")
 
@@ -29,18 +29,18 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				{!! Form::model($device, ['route' => [config('laraadmin.adminRoute') . '.devices.update', $device->id ], 'method'=>'PUT', 'id' => 'device-edit-form']) !!}
+				{!! Form::model($fitmachine, ['route' => [config('laraadmin.adminRoute') . '.fitmachines.update', $fitmachine->id ], 'method'=>'PUT', 'id' => 'fitmachine-edit-form']) !!}
 					@la_form($module)
 					
 					{{--
-					@la_input($module, 'mac_addr')
+					@la_input($module, 'mac_address')
 					@la_input($module, 'description')
 					@la_input($module, 'last_reported')
 					@la_input($module, 'fw_version')
 					--}}
                     <br>
 					<div class="form-group">
-						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/devices') }}">Cancel</a></button>
+						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/fitmachines') }}">Cancel</a></button>
 					</div>
 				{!! Form::close() !!}
 			</div>
@@ -53,7 +53,7 @@
 @push('scripts')
 <script>
 $(function () {
-	$("#device-edit-form").validate({
+	$("#fitmachine-edit-form").validate({
 		
 	});
 });

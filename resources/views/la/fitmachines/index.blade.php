@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Devices")
-@section("contentheader_description", "Devices listing")
-@section("section", "Devices")
+@section("contentheader_title", "FitMachines")
+@section("contentheader_description", "FitMachines listing")
+@section("section", "FitMachines")
 @section("sub_section", "Listing")
-@section("htmlheader_title", "Devices Listing")
+@section("htmlheader_title", "FitMachines Listing")
 
 @section("headerElems")
-@la_access("Devices", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Device</button>
+@la_access("FitMachines", "create")
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add FitMachine</button>
 @endla_access
 @endsection
 
@@ -45,21 +45,21 @@
 	</div>
 </div>
 
-@la_access("Devices", "create")
+@la_access("FitMachines", "create")
 <div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add Device</h4>
+				<h4 class="modal-title" id="myModalLabel">Add FitMachine</h4>
 			</div>
-			{!! Form::open(['action' => 'LA\DevicesController@store', 'id' => 'device-add-form']) !!}
+			{!! Form::open(['action' => 'LA\FitMachinesController@store', 'id' => 'fitmachine-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
                     @la_form($module)
 					
 					{{--
-					@la_input($module, 'mac_addr')
+					@la_input($module, 'mac_address')
 					@la_input($module, 'description')
 					@la_input($module, 'last_reported')
 					@la_input($module, 'fw_version')
@@ -89,7 +89,7 @@ $(function () {
 	$("#example1").DataTable({
 		processing: true,
         serverSide: true,
-        ajax: "{{ url(config('laraadmin.adminRoute') . '/device_dt_ajax') }}",
+        ajax: "{{ url(config('laraadmin.adminRoute') . '/fitmachine_dt_ajax') }}",
 		language: {
 			lengthMenu: "_MENU_",
 			search: "_INPUT_",
@@ -99,7 +99,7 @@ $(function () {
 		columnDefs: [ { orderable: false, targets: [-1] }],
 		@endif
 	});
-	$("#device-add-form").validate({
+	$("#fitmachine-add-form").validate({
 		
 	});
 });

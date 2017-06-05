@@ -1,14 +1,14 @@
 @extends("la.layouts.app")
 
-@section("contentheader_title", "Departments")
-@section("contentheader_description", "departments listing")
-@section("section", "Departments")
+@section("contentheader_title", "Organizations")
+@section("contentheader_description", "Organizations listing")
+@section("section", "Organizations")
 @section("sub_section", "Listing")
-@section("htmlheader_title", "Departments Listing")
+@section("htmlheader_title", "Organizations Listing")
 
 @section("headerElems")
-@la_access("Departments", "create")
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Department</button>
+@la_access("Organizations", "create")
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Add Organization</button>
 @endla_access
 @endsection
 
@@ -45,15 +45,15 @@
 	</div>
 </div>
 
-@la_access("Departments", "create")
+@la_access("Organizations", "create")
 <div class="modal fade" id="AddModal" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add Department</h4>
+				<h4 class="modal-title" id="myModalLabel">Add Organization</h4>
 			</div>
-			{!! Form::open(['action' => 'LA\DepartmentsController@store', 'id' => 'department-add-form']) !!}
+			{!! Form::open(['action' => 'LA\OrganizationsController@store', 'id' => 'department-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
                     @la_form($module)
@@ -62,6 +62,8 @@
 					@la_input($module, 'name')
 					@la_input($module, 'tags')
 					@la_input($module, 'color')
+					@la_input($module, 'sub_domain')
+					@la_input($module, 'logo')
 					--}}
 				</div>
 			</div>

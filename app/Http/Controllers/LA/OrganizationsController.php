@@ -23,7 +23,7 @@ class OrganizationsController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'name';
-	public $listing_cols = ['id', 'name', 'phone', 'sub_domain', 'assigned_to', 'connect_since', 'address', 'city', 'description', 'profile_image', 'profile'];
+	public $listing_cols = ['id', 'name', 'sub_domain', 'logo'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
@@ -213,7 +213,7 @@ class OrganizationsController extends Controller
 		$out = Datatables::of($values)->make();
 		$data = $out->getData();
 
-		$fields_popup = ModuleFields::getModuleFields('Organizations');
+		$fields_popup = ModuleFields::getModuleFields('organizations');
 		
 		for($i=0; $i < count($data->data); $i++) {
 			for ($j=0; $j < count($this->listing_cols); $j++) { 

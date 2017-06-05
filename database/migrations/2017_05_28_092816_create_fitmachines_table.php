@@ -8,7 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Dwij\Laraadmin\Models\Module;
 
-class CreateOrganisationsTable extends Migration
+class CreateFitmachinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,9 +17,11 @@ class CreateOrganisationsTable extends Migration
      */
     public function up()
     {
-        Module::generate("Organisations", 'organisations', 'sub_domain', 'fa-bank', [
-            ["name", "name", "String", true, "", 0, 256, false],
-            ["sub_domain", "sub_domain", "String", true, "", 0, 256, true],
+        Module::generate("Fitmachines", 'fitmachines', 'mac_address', 'fa-cogs', [
+            ["mac_address", "mac_address", "String", false, "", 0, 256, false],
+            ["description", "description", "String", false, "", 0, 256, false],
+            ["last_reported", "last_reported", "Datetime", false, "", 0, 0, false],
+            ["fw_version", "fw_version", "Integer", false, "", 0, 11, false],
         ]);
 		
 		/*
@@ -65,8 +67,8 @@ class CreateOrganisationsTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('organisations')) {
-            Schema::drop('organisations');
+        if (Schema::hasTable('fitmachines')) {
+            Schema::drop('fitmachines');
         }
     }
 }

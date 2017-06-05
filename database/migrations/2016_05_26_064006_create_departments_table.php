@@ -4,7 +4,6 @@
  * Help: http://laraadmin.com
  */
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Dwij\Laraadmin\Models\Module;
@@ -22,6 +21,8 @@ class CreateDepartmentsTable extends Migration
             ["name", "Name", "Name", true, "", 1, 250, true],
             ["tags", "Tags", "Taginput", false, [], 0, 0, false],
             ["color", "Color", "String", false, "", 0, 50, true],
+            ["sub_domain", "sub_domain", "URL", true, "", 0, 256, true],
+            ["logo", "logo", "Image", false, "", 0, 0, false],
         ]);
 		
 		/*
